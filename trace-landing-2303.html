@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRACE: Evidence-backed brand positioning audits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0f0f0f;
+  --ink-secondary: #4a4a47;
+  --ink-muted: #8a8a85;
+  --surface: #faf9f7;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f2f0ec;
+  --border: rgba(15,15,15,0.10);
+  --border-strong: rgba(15,15,15,0.18);
+
+  --indigo: #1e2a6e;
+  --indigo-mid: #2d3fa8;
+  --indigo-light: #e8ebf8;
+  --indigo-pale: #f3f4fb;
+
+  --amber: #c27e1a;
+  --green: #2d6a3f;
+  --green-light: #edf5ef;
+
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'Instrument Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+
+  --radius: 3px;
+  --radius-lg: 6px;
+  --max: 860px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(250,249,247,0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav-wordmark {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--indigo);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 0;
+  list-style: none;
+}
+.nav-links a {
+  display: block;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink-secondary);
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: color 0.15s, background 0.15s;
+}
+.nav-links a:hover { color: var(--ink); background: var(--surface-sunken); }
+.nav-cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 16px;
+  background: var(--indigo);
+  color: rgba(255,255,255,0.92);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--indigo-mid); }
+
+/* ── LAYOUT ── */
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+section {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--border);
+}
+section:last-of-type { border-bottom: none; }
+
+/* ── HERO ── */
+.hero {
+  padding: 128px 0 96px;
+  border-bottom: 1px solid var(--border);
+}
+.hero-kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-kicker::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--indigo-mid);
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(44px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 28px;
+  max-width: 680px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--indigo-mid);
+}
+.hero-sub {
+  font-size: 17px;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+  max-width: 500px;
+  margin-bottom: 44px;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--indigo);
+  color: rgba(255,255,255,0.92);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.btn-primary:hover { background: var(--indigo-mid); }
+.hero-note {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+}
+.hero-proof {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.hero-proof-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  flex-shrink: 0;
+}
+.hero-proof-item {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero-proof-item::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+/* ── SECTION LABELS ── */
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 40px;
+  background: var(--border-strong);
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.section-lead {
+  font-size: 16px;
+  color: var(--ink-secondary);
+  max-width: 520px;
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+
+/* ── PROBLEM STATEMENT ── */
+.problem-pull {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--ink-secondary);
+  max-width: 620px;
+  padding: 32px 0 32px 28px;
+  border-left: 3px solid var(--indigo-mid);
+}
+
+/* ── COMPARISON GRID ── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 0;
+}
+.compare-card {
+  background: var(--surface-raised);
+  padding: 32px 28px;
+}
+.compare-card.trace {
+  background: var(--indigo);
+}
+.compare-card-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 24px;
+}
+.compare-card.trace .compare-card-label {
+  color: rgba(255,255,255,0.45);
+}
+.compare-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+.compare-item:last-child { margin-bottom: 0; }
+.compare-item-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.compare-card.trace .compare-item {
+  color: rgba(255,255,255,0.8);
+}
+.compare-card.other .compare-item-icon { color: var(--ink-muted); }
+.compare-card.trace .compare-item-icon { color: rgba(255,255,255,0.6); }
+
+/* ── HOW IT WORKS ── */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+  padding-top: 3px;
+}
+.step-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.step-desc {
+  font-size: 14px;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+}
+
+/* ── DELIVERABLES ── */
+.deliverables-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.deliverable-card {
+  background: var(--surface-raised);
+  padding: 28px 24px;
+}
+.deliverable-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--indigo-pale);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--indigo-mid);
+}
+.deliverable-icon svg { width: 16px; height: 16px; }
+.deliverable-title {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: 0.01em;
+}
+.deliverable-desc {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+}
+
+/* ── MISALIGNMENT ── */
+.misalign-types {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+.misalign-item {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 20px;
+}
+.misalign-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.misalign-item-desc {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.trust-item {
+  background: var(--surface-raised);
+  padding: 24px 20px;
+}
+.trust-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.trust-item-desc {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+/* ── FOR WHO ── */
+.for-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 520px;
+}
+.for-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+}
+.for-card-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.for-card.yes .for-card-label { color: var(--green); }
+.for-card.no .for-card-label { color: var(--ink-muted); }
+.for-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.for-list li {
+  font-size: 14px;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.for-list li::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.for-card.yes .for-list li::before { background: var(--green); }
+.for-card.no .for-list li::before { background: var(--ink-muted); }
+
+/* ── PRICING ── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.pricing-card {
+  background: var(--surface-raised);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.pricing-card.featured {
+  background: var(--indigo);
+}
+.pricing-badge {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background: var(--indigo-mid);
+  color: rgba(255,255,255,0.9);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.pricing-header {
+  padding: 32px 24px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.pricing-card.featured .pricing-header {
+  border-color: rgba(255,255,255,0.12);
+}
+.pricing-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 12px;
+}
+.pricing-card.featured .pricing-name { color: rgba(255,255,255,0.5); }
+.pricing-price {
+  font-family: var(--serif);
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.pricing-card.featured .pricing-price { color: white; }
+.pricing-period {
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.pricing-card.featured .pricing-period { color: rgba(255,255,255,0.5); }
+.pricing-body {
+  padding: 24px;
+  flex: 1;
+}
+.pricing-section-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.pricing-section-title:first-child { margin-top: 0; }
+.pricing-card.featured .pricing-section-title { color: rgba(255,255,255,0.4); }
+.pricing-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.pricing-list li {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.pricing-card.featured .pricing-list li { color: rgba(255,255,255,0.75); }
+.pricing-list li::before {
+  content: '–';
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.pricing-card.featured .pricing-list li::before { color: rgba(255,255,255,0.3); }
+.pricing-footer {
+  padding: 20px 24px 24px;
+  border-top: 1px solid var(--border);
+}
+.pricing-card.featured .pricing-footer { border-color: rgba(255,255,255,0.12); }
+.pricing-best-for {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+.pricing-card.featured .pricing-best-for { color: rgba(255,255,255,0.45); }
+.pricing-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.pricing-btn:hover { background: var(--indigo-pale); color: var(--indigo-mid); border-color: var(--indigo-mid); }
+.pricing-card.featured .pricing-btn {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.85);
+}
+.pricing-card.featured .pricing-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ── CTA SECTION ── */
+.cta-section {
+  background: var(--indigo);
+  color: white;
+  padding: 80px 0;
+  border-bottom: none;
+}
+.cta-section .container {
+  text-align: center;
+}
+.cta-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 24px;
+}
+.cta-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: white;
+  margin-bottom: 16px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 36px;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: white;
+  color: var(--indigo);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.btn-cta:hover { opacity: 0.88; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--surface-raised);
+  border-top: 1px solid var(--border);
+  padding: 48px 0 32px;
+}
+.footer-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 48px;
+  margin-bottom: 40px;
+  align-items: start;
+}
+.footer-brand-name {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--indigo);
+  margin-bottom: 8px;
+}
+.footer-brand-desc {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  max-width: 280px;
+}
+.footer-col-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 14px;
+}
+.footer-col-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-col-links a {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-col-links a:hover { color: var(--ink); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.03em;
+}
+.footer-made {
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+/* ── FREE SIGNAL REPORT ── */
+.signal-report-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.signal-report-left {}
+.signal-report-form {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.signal-report-form-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-sunken);
+}
+.signal-report-form-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 4px;
+}
+.signal-report-form-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.signal-report-form-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.form-input {
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+.form-input:focus { border-color: var(--indigo-mid); }
+.form-input::placeholder { color: var(--ink-muted); }
+.form-hint {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+.form-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: var(--indigo);
+  color: rgba(255,255,255,0.92);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s;
+  margin-top: 4px;
+}
+.form-submit:hover { background: var(--indigo-mid); }
+.signal-what {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.signal-what-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 18px 20px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.signal-what-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--indigo-mid);
+  padding-top: 1px;
+}
+.signal-what-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.signal-what-desc {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  line-height: 1.55;
+}
+.signal-note {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--indigo-pale);
+  border-left: 3px solid var(--indigo-mid);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  font-size: 12px;
+  color: var(--indigo);
+  line-height: 1.6;
+}
+
+/* ── PRICING 2-COL ── */
+.pricing-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.pricing-compare-note {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+.pricing-compare-note strong {
+  color: var(--ink-secondary);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  nav .nav-links { display: none; }
+  .container { padding: 0 20px; }
+  .hero { padding: 96px 0 64px; }
+  .compare-grid, .deliverables-grid, .for-grid, .pricing-grid, .pricing-grid-2, .trust-grid, .misalign-types, .signal-report-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-wordmark" href="#">TRACE</a>
+    <ul class="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#free">Positioning Signal Report</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <a class="nav-cta" href="#free">Get free signal report</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero" style="margin-top:52px;">
+  <div class="container">
+    <p class="hero-kicker">Evidence-backed brand positioning audits</p>
+    <h1 class="hero-title">Your brand is being<br><em>misread by the market.</em><br>You just don't know&nbsp;it&nbsp;yet.</h1>
+    <p class="hero-sub">TRACE surfaces the gap between how you position yourself and how the market actually receives you. Traceable evidence, delivered in 24 hours.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#free">
+        Get your free signal report
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7.5 3l3.5 3.5L7.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <span class="hero-note">No credit card &nbsp;·&nbsp; Results in 24 hours</span>
+    </div>
+    <div class="hero-proof">
+      <span class="hero-proof-label">Built for</span>
+      <span class="hero-proof-item">Founders clarifying positioning before a launch</span>
+      <span class="hero-proof-item">Marketing leads diagnosing why messaging isn't landing</span>
+      <span class="hero-proof-item">Brand strategists conducting competitive audits</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── PROBLEM ── -->
+<section id="problem">
+  <div class="container">
+    <div class="section-label">The problem</div>
+ <blockquote class="problem-pull">Positioning misalignment is invisible from the inside. Each channel looks fine in isolation. The whole is fractured. The market feels it before you do.</blockquote>
+  </div>
+</section>
+
+<!-- ── WHAT TRACE DOES DIFFERENTLY ── -->
+<section id="different">
+  <div class="container">
+    <div class="section-label">What TRACE does differently</div>
+    <h2 class="section-title">Defensible judgment,<br>not just fluent summaries.</h2>
+ <p class="section-lead">TRACE works with qualitative evidence and makes its reasoning explicit, so you can verify every insight.</p>
+
+    <div class="compare-grid">
+      <div class="compare-card trace">
+        <div class="compare-card-label">TRACE</div>
+        <div class="compare-item">
+          <svg class="compare-item-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Works with qualitative evidence
+        </div>
+        <div class="compare-item">
+          <svg class="compare-item-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Produces defensible positioning arguments
+        </div>
+        <div class="compare-item">
+          <svg class="compare-item-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Highlights misalignment patterns
+        </div>
+        <div class="compare-item">
+          <svg class="compare-item-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Makes uncertainty explicit
+        </div>
+      </div>
+      <div class="compare-card other">
+        <div class="compare-card-label">Other tools</div>
+        <div class="compare-item">
+          <svg class="compare-item-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.4"/><path d="M12 6L6 12M6 6l6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          Generic summaries without judgment
+        </div>
+        <div class="compare-item">
+          <svg class="compare-item-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.4"/><path d="M12 6L6 12M6 6l6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          Dashboards without defensible claims
+        </div>
+        <div class="compare-item">
+          <svg class="compare-item-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.4"/><path d="M12 6L6 12M6 6l6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          Vibes disguised as insight
+        </div>
+        <div class="compare-item">
+          <svg class="compare-item-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.4"/><path d="M12 6L6 12M6 6l6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          Invented confidence, no traceability
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section id="how">
+  <div class="container">
+    <div class="section-label">How TRACE works</div>
+    <h2 class="section-title">Five structured steps<br>from evidence to action.</h2>
+ <p class="section-lead">A repeatable diagnostic process. Not a black box.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Collects structured evidence</div>
+ <div class="step-desc">Website content, design signals, Instagram posts, public perception snippets, all tagged as sources.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">Separates facts from interpretation</div>
+          <div class="step-desc">Clear distinction between what was observed and what it might mean. Facts and analysis are always labeled.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Compares brand vs competitors vs market voice</div>
+ <div class="step-desc">Systematic comparison across multiple dimensions of positioning, not just your own messaging.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">Identifies misalignments</div>
+ <div class="step-desc">Gaps between promise and proof, ICP confusion, design-message contradictions, surfaced explicitly.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div>
+          <div class="step-title">Outputs testable next actions</div>
+ <div class="step-desc">Concrete, prioritized recommendations based on observed misalignments. No generic best practice.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT YOU GET ── -->
+<section id="what">
+  <div class="container">
+    <div class="section-label">What you get</div>
+    <h2 class="section-title">Four artifacts,<br>every audit cycle.</h2>
+    <p class="section-lead">Each deliverable is built from evidence and structured for action.</p>
+
+    <div class="deliverables-grid">
+      <div class="deliverable-card">
+        <div class="deliverable-icon">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="deliverable-title">Positioning summary</div>
+        <div class="deliverable-desc">Comparative analysis of how your brand positions itself relative to competitors and market expectations.</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-icon">
+          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v4M8 11v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="deliverable-title">Misalignment diagnosis</div>
+        <div class="deliverable-desc">The core artifact. Specific gaps between what your brand promises and what it actually proves.</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-icon">
+          <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M5 7h6M5 9.5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="deliverable-title">Market voice digest</div>
+        <div class="deliverable-desc">Synthesis of how your category communicates and where your voice fits or deviates from the norm.</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-icon">
+          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 8l2 2 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="deliverable-title">Prioritized action plan</div>
+ <div class="deliverable-desc">3 to 10 testable items ranked by strategic impact and ease of validation. No generic recommendations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MISALIGNMENT ── -->
+<section id="misalignment">
+  <div class="container">
+    <div class="section-label">Misalignment as the hero insight</div>
+    <h2 class="section-title">The gap between what you<br>claim and what you prove.</h2>
+    <p class="section-lead">Misalignment occurs when different parts of your brand communicate different things. It is often invisible without structured analysis.</p>
+
+    <div class="misalign-types">
+      <div class="misalign-item">
+ <div class="misalign-item-title">Promise-proof gaps</div>
+        <div class="misalign-item-desc">Claiming expertise without demonstrating it through content, design, or customer proof.</div>
+      </div>
+      <div class="misalign-item">
+        <div class="misalign-item-title">ICP confusion</div>
+ <div class="misalign-item-desc">Targeting everyone, resonating with no one messaging that fails to speak to a specific buyer.</div>
+      </div>
+      <div class="misalign-item">
+ <div class="misalign-item-title">Design-message contradictions</div>
+ <div class="misalign-item-desc">Serious copy on a playful visual system, or vice versa. The experience undermines the claim.</div>
+      </div>
+      <div class="misalign-item">
+        <div class="misalign-item-title">Channel incoherence</div>
+        <div class="misalign-item-desc">Different voices across platforms. Each channel seems fine in isolation, but the whole is fractured.</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-bottom:16px;">Trust and credibility</div>
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-item-title">Every claim is traceable</div>
+        <div class="trust-item-desc">No assertion without source. You can verify every insight against the evidence it was drawn from.</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-item-title">Facts and interpretation are labeled</div>
+        <div class="trust-item-desc">Clear separation between what was observed and what the analysis concludes.</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-item-title">Uncertainty is explicit</div>
+        <div class="trust-item-desc">If evidence is insufficient, TRACE says so. No invented confidence. No fabricated facts.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO IT'S FOR ── -->
+<section id="who">
+  <div class="container">
+    <div class="section-label">Who TRACE is for</div>
+    <h2 class="section-title">Built for people who act<br>on evidence.</h2>
+ <p class="section-lead">TRACE is not for everyone, and that's intentional.</p>
+
+    <div class="for-grid">
+      <div class="for-card yes">
+        <div class="for-card-label">TRACE is for</div>
+        <ul class="for-list">
+          <li>Founders clarifying positioning before a launch or pivot</li>
+          <li>Marketing leads diagnosing why messaging is not landing</li>
+          <li>Brand strategists and consultants conducting competitive audits</li>
+          <li>Teams preparing for rebrands, launches, or category shifts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FREE POSITIONING SIGNAL REPORT ── -->
+<section id="free">
+  <div class="container">
+    <div class="section-label">Free positioning signal report</div>
+    <h2 class="section-title">See what the market<br>sees. For free.</h2>
+    <p class="section-lead">Three positioning signals drawn from your website and CRM data, delivered in 24 hours. No credit card, no sales call.</p>
+
+    <div class="signal-what" style="max-width:600px; margin-bottom:32px;">
+      <div class="signal-what-item">
+        <div class="signal-what-num">01</div>
+        <div>
+          <div class="signal-what-title">One commercial signal</div>
+          <div class="signal-what-desc">Drawn from your win/loss and deal-size data, surfacing patterns that typically point to positioning gaps rather than sales execution problems.</div>
+        </div>
+      </div>
+      <div class="signal-what-item">
+        <div class="signal-what-num">02</div>
+        <div>
+          <div class="signal-what-title">One website observation</div>
+          <div class="signal-what-desc">A specific, evidence-backed finding on your homepage: promise-proof gaps, audience clarity, or design-message coherence. Not a score. A real observation.</div>
+        </div>
+      </div>
+      <div class="signal-what-item">
+        <div class="signal-what-num">03</div>
+        <div>
+          <div class="signal-what-title">One open diagnostic question</div>
+          <div class="signal-what-desc">The pattern we found typically means X or Y. A full audit would tell you which, and what to do about it.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="signal-note" style="max-width:600px; margin-bottom:32px;">This is not a summary. It is a partial diagnosis: precise enough to be useful, incomplete enough to show you what you're missing.</div>
+
+    <a class="btn-primary" href="#">
+      Get my free signal report
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7.5 3l3.5 3.5L7.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">One audit, or<br>ongoing tracking.</h2>
+    <p class="section-lead">Two products for two different questions.</p>
+
+    <div class="pricing-grid-2">
+
+      <!-- SINGLE AUDIT -->
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <div class="pricing-name">Single Audit</div>
+          <div class="pricing-price">€499<span class="pricing-period"> one-time</span></div>
+        </div>
+        <div class="pricing-body">
+          <div class="pricing-section-title">What it answers</div>
+          <ul class="pricing-list">
+            <li>Where is my brand positioned right now?</li>
+            <li>Where are the gaps between what I claim and what I prove?</li>
+            <li>What should I test first?</li>
+          </ul>
+          <div class="pricing-section-title">Delivered in 24 hours</div>
+          <ul class="pricing-list">
+ <li>Positioning summary: comparative analysis vs market and competitors</li>
+ <li>Misalignment diagnosis: specific gaps with cited evidence</li>
+ <li>Market voice digest: how your category communicates, where you fit</li>
+ <li>5 to 7 prioritized, testable actions</li>
+          </ul>
+          <div class="pricing-section-title">Sources analyzed</div>
+          <ul class="pricing-list">
+            <li>Website (copy + design signals)</li>
+            <li>CRM data (deal patterns, win/loss, pipeline signals)</li>
+          </ul>
+        </div>
+        <div class="pricing-footer">
+          <div class="pricing-best-for">Best for founders pre-launch, marketing leads diagnosing a specific problem, or consultants needing a client deliverable.</div>
+          <a class="pricing-btn" href="#">Order a single audit</a>
+        </div>
+      </div>
+
+      <!-- MONTHLY RETAINER (FEATURED) -->
+      <div class="pricing-card featured">
+        <div class="pricing-header">
+          <div class="pricing-name">Monthly Retainer</div>
+          <div class="pricing-price">€299<span class="pricing-period">/month</span></div>
+        </div>
+        <div class="pricing-body">
+          <div class="pricing-section-title">What it answers</div>
+          <ul class="pricing-list">
+ <li>Is our positioning drifting? In which direction?</li>
+            <li>Are our actions from last month moving the needle?</li>
+            <li>What has changed in how the market perceives us?</li>
+          </ul>
+          <div class="pricing-section-title">How it works</div>
+          <ul class="pricing-list">
+ <li>Monthly audit runs on the same brand. Each one is a datapoint</li>
+            <li>Previous audits become a longitudinal evidence base</li>
+            <li>Drift is detected by comparing signals across time, not just snapshots</li>
+            <li>You see whether you're converging toward your intended position or drifting away</li>
+          </ul>
+          <div class="pricing-section-title">Each month you receive</div>
+          <ul class="pricing-list">
+            <li>Updated positioning diagnosis with delta from previous month</li>
+            <li>New misalignment findings + validation of prior actions</li>
+ <li>3 to 5 updated testable actions based on what changed</li>
+          </ul>
+        </div>
+        <div class="pricing-footer">
+ <div class="pricing-best-for">Best for brands in active markets where a single snapshot isn't enough and strategic drift needs to be caught before it hardens.</div>
+          <a class="pricing-btn" href="#">Start monthly retainer</a>
+        </div>
+      </div>
+
+    </div>
+    <p class="pricing-compare-note">A single audit answers <strong>where you are</strong>. The retainer tracks <strong>whether you're moving</strong>.</p>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta-section">
+  <div class="container">
+    <div class="cta-label">Get started</div>
+    <h2 class="cta-title">Find out how your brand is actually being read.</h2>
+ <p class="cta-sub">Start with a free positioning signal report: three observations, delivered in 24 hours, no credit card required.</p>
+    <a class="btn-cta" href="#free">
+      Get your free signal report
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7.5 3l3.5 3.5L7.5 10" stroke="var(--indigo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">TRACE</div>
+        <div class="footer-brand-desc">Evidence-backed brand positioning audits that analyze your website, social presence, and market voice to reveal how your brand is actually positioned.</div>
+      </div>
+      <div>
+        <div class="footer-col-label">Product</div>
+        <ul class="footer-col-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Analysis</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-label">Legal</div>
+        <ul class="footer-col-links">
+          <li><a href="#">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Plyke OÜ. All rights reserved.</span>
+      <span class="footer-made">Made in Estonia</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
